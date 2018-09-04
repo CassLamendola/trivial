@@ -31,10 +31,10 @@
 
 .app-bar{
   padding: 20px;
+  height: 55px;
   display: flex;
   flex-direction: row !important;
   align-items: center;
-  max-width: 100% !important;
 }
 
 .menu {
@@ -67,7 +67,7 @@
 }
 
 .question {
-  margin-top: 75px;
+  margin-top: 55px;
   width: 100%;
   padding: 10px;
   min-height: 30vh;
