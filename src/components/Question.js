@@ -62,7 +62,7 @@ class Question extends Component {
           className="app-bar" 
           color="inherit"
           onClick={() => {this.props.history.push('/')}}>
-          <ArrowBackIos/>
+          <ArrowBackIos className="back"/>
           <span className="back">Back to Menu</span>
         </AppBar>
         <Slide direction="left" in={this.state.in} timeout={{enter: 500, exit: 0}}>

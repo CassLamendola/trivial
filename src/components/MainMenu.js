@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Menu from './Menu';
-// import Transition from 'react-transition-group/Transition';
 import { Slide, AppBar } from '@material-ui/core';
 
 class MainMenu extends Component {
@@ -8,8 +7,20 @@ class MainMenu extends Component {
     super(props);
     this.state = {
       categories: [],
-      game: props.game
+      category: null,
+      game: props.game,
+      difficulties: [
+        {"name": "Easy", "id": 0},
+        {"name": "Medium", "id": 1},
+        {"name": "Hard", "id": 2}
+      ],
+      catIn: false, 
+      diffIn: false
     }
+  }
+  
+  componentWillMount() {
+    this.setState({ catIn: true })
   }
   
   componentDidMount() {
@@ -18,29 +29,52 @@ class MainMenu extends Component {
       .then( categories => {
         this.setState({ categories: categories.trivia_categories });
       })
-      .catch( err => console.log(err));
+      .catch( err =>  this.props.history.push('/error'));
   }
 
-  handleSelect = (name, value) => {
-    this.props.startGame(value);
+  handleSelect = (value) => {
+    const category = this.state.category;
+    if (this.state.category) {
+      this.props.startGame(category, value.name.toLowerCase());
+    } else {
+      this.setState({ catIn: false })
+      setTimeout(() => {
+        this.setState({ category: value.id, diffIn: true });
+      }, 200);
+    }
   }
   
   render() { 
     return (
-      <div className="container main-menu">
-        <AppBar 
-          position="fixed" 
-          color="inherit"
-          className="app-bar">
-          Choose One
-        </AppBar>
-        <Slide direction="left" in={true} timeout={500}>
-          <Menu
-            options={this.state.categories} 
-            handleSelect={this.handleSelect} 
-            name='category'/>
-        </Slide>
-      </div>
+      this.state.category ? (
+        <div className="container difficulty-menu">
+          <AppBar 
+            position="fixed" 
+            color="inherit"
+            className="app-bar">
+            Select Difficulty
+          </AppBar>
+          <Slide direction="left" in={this.state.diffIn} timeout={{enter: 500, exit: 0}}>
+            <Menu
+              options={this.state.difficulties} 
+              handleSelect={this.handleSelect}/>
+          </Slide>
+        </div>
+      ) : (
+        <div className="container category-menu">
+          <AppBar 
+            position="fixed" 
+            color="inherit"
+            className="app-bar">
+            Select Category
+          </AppBar>
+          <Slide direction="left" in={this.state.catIn} timeout={{enter: 500, exit: 0}}>
+            <Menu
+              options={this.state.categories} 
+              handleSelect={this.handleSelect}/>
+          </Slide>
+        </div>
+      )
     );
   }
 }

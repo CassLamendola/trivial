@@ -6,10 +6,15 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  max-width: 600px;
 }
 
-.container.main-menu{
+.container.category-menu{
   background-color: #fc4a1a
+}
+
+.container.difficulty-menu{
+  background-color: #f7b733
 }
 
 .container.question-container{
@@ -20,11 +25,16 @@
   background-color: #f7b733
 }
 
+.container.error{
+  background-color: #fc4a1a
+}
+
 .app-bar{
   padding: 20px;
   display: flex;
   flex-direction: row !important;
   align-items: center;
+  max-width: 100% !important;
 }
 
 .menu {
@@ -34,12 +44,22 @@
 
 .menu-list-item {
   width: 100%;
-  margin: 5px 0px !important;
-  background-color: white !important;
+  margin: 5px 0px;
+  background-color: white;
+  height: 50px;
+}
+
+.inner-list-item {
+  margin: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between !important;
-  height: 50px;
+}
+
+.back {
+  cursor: pointer;
 }
 
 .question-card{

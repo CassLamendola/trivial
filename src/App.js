@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Switch, Route, withRouter } from 'react-router';
 import Trivia from './lib/Trivia.js';
-import { MainMenu, Question, Result } from './components/index';
+import { MainMenu, Question, Result, DisplayError } from './components/index';
 
 class App extends Component {
   constructor(props) {
@@ -18,11 +18,12 @@ class App extends Component {
     this.setState({ game });
   }
 
-  startGame = (category) => {
+  startGame = (category, difficulty) => {
     const options = {
       type: 'multiple',
       amount: this.state.quizLength,
-      category: category
+      category: category,
+      difficulty: difficulty
     };
     
     this.state.game.getQuestions(options)
@@ -32,7 +33,7 @@ class App extends Component {
         localStorage.setItem('correct', 0);
         this.props.history.push('/question/1');
       })
-      .catch( err => console.log(err) );
+      .catch( err => this.props.history.push('/error') );
   }
 
   updateScore = (correct=0) => {
@@ -67,6 +68,7 @@ class App extends Component {
               updateScore={this.updateScore.bind(this)}/>
           )}/>
         <Route path="/result" component={Result}/>
+        <Route path="/error" component={DisplayError}/>
       </Switch>
     );
   }
