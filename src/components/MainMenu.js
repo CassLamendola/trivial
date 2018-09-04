@@ -20,7 +20,7 @@ class MainMenu extends Component {
   }
   
   componentWillMount() {
-    this.setState({ catIn: true })
+    this.setState({ catIn: true });
   }
   
   componentDidMount() {
@@ -37,7 +37,8 @@ class MainMenu extends Component {
     if (this.state.category) {
       this.props.startGame(category, value.name.toLowerCase());
     } else {
-      this.setState({ catIn: false })
+      window.scrollTo(0, 0);
+      this.setState({ catIn: false });
       setTimeout(() => {
         this.setState({ category: value.id, diffIn: true });
       }, 200);

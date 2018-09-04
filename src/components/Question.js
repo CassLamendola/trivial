@@ -10,6 +10,7 @@ class Question extends Component {
     this.state = {
       answers: [],
       question: {},
+      questionContent: '',
       in: false
     }
   }
@@ -40,8 +41,14 @@ class Question extends Component {
     const questions = JSON.parse(localStorage.getItem('questions'));
     const index = Number(this.props.match.params.id) - 1;
     const question = questions[index];
-    const answers = this.shuffleAnswers(question.incorrect_answers, question.correct_answer);
-    this.setState({ answers, question, in: true });
+    if (!question) {
+      this.props.history.push('/error')
+    } else {
+      console.log(question);
+      const questionContent = he.decode(question.question)
+      const answers = this.shuffleAnswers(question.incorrect_answers, question.correct_answer);
+      this.setState({ answers, question, questionContent, in: true });
+    }
   }
 
   selectAnswer = (target, selectedAnswer) => {
@@ -68,7 +75,7 @@ class Question extends Component {
         <Slide direction="left" in={this.state.in} timeout={{enter: 500, exit: 0}}>
           <div className="question-card">
             <Card className="question">
-              <CardHeader title={he.decode(this.state.question.question)}/>
+              <CardHeader title={this.state.questionContent}/>
             </Card>
             <Answers answers={this.state.answers} selectAnswer={this.selectAnswer}/>
           </div>

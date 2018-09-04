@@ -7,11 +7,10 @@ const Menu = (props) => {
     <List className="menu">
       {props.options.map( option => {
         return(
-          <div className="menu-list-item">
+          <div className="menu-list-item" key={option.id}>
             <ListItem
               className="inner-list-item"
               button={true}
-              key={option.id}
               onClick={(e) => {props.handleSelect(option)}}>
               {option.name}
               <ArrowForwardIos/>
