@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Switch, Route, withRouter } from 'react-router';
-import Trivia from 'trivia-api';
+import Trivia from './lib/Trivia.js';
 import { MainMenu, Question, Result } from './components/index';
 
 class App extends Component {
