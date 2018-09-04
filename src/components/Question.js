@@ -25,7 +25,8 @@ class Question extends Component {
   }
 
   shuffleAnswers = (incorrect, correct) => {
-    const answers = incorrect.concat(correct);
+    let answers = incorrect.concat(correct);
+    answers = answers.map(a => he.decode(a));
     for (let i = answers.length - 1; i > 0; i -= 1) {
       let j = Math.floor(Math.random() * (i + 1));
       let temp = he.decode(answers[i]);

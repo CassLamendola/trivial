@@ -11,7 +11,7 @@ const Result = (props) => {
         <Card className="result-card">
           <CardHeader title={`Score: ${score}%`}/>
           <Button 
-            color="primary" 
+            color="inherit" 
             size="large"
             variant="contained"
             onClick={() => props.history.push('/')}>
