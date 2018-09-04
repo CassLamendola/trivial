@@ -12,7 +12,8 @@ class MainMenu extends Component {
       difficulties: [
         {"name": "Easy", "id": 0},
         {"name": "Medium", "id": 1},
-        {"name": "Hard", "id": 2}
+        {"name": "Hard", "id": 2},
+        {"name": "Random", "id": 3}
       ],
       catIn: false, 
       diffIn: false
